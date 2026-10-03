@@ -1,0 +1,15 @@
+{
+  "name": "ultimate-setup",
+  "description": "Mods from Claude-Code-Ultimate-Setup: an emoji HUD and other add-ons for Claude Code",
+  "owner": {
+    "name": "RaDeleon",
+    "url": "https://github.com/RaDeleon"
+  },
+  "plugins": [
+    {
+      "name": "ultimate-hud",
+      "source": "./mods/ultimate-hud",
+      "description": "Emoji HUD above the prompt: model, repo, branch, context, tokens in/out, cache hit/write %, cost and rate limits"
+    }
+  ]
+}
