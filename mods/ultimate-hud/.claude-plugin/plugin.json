@@ -1,0 +1,9 @@
+{
+  "name": "ultimate-hud",
+  "version": "0.1.0",
+  "description": "Emoji HUD above the prompt: model, repo, branch, context, tokens in/out, cache hit/write %, cost and rate limits",
+  "author": { "name": "RaDeleon", "url": "https://github.com/RaDeleon" },
+  "repository": "https://github.com/RaDeleon/Claude-Code-Ultimate-Setup",
+  "license": "Apache-2.0",
+  "types": "./types/index.d.ts"
+}
