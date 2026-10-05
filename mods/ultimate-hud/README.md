@@ -28,6 +28,14 @@ Bars are green under 70%, yellow from 70%, and red from 90%. A field with no dat
 
 Run `/hud` to hide or show the band.
 
+## Settings
+
+| Setting | Values | Default |
+| --- | --- | --- |
+| **Show HUD in** (`showIn`) | `everywhere`, `desktop` (the Code tab of the Claude Desktop app only), `terminal` (the terminal only) | `everywhere` |
+
+Change it in `/config`. Set it to `desktop` if you already have a terminal status line and only want the HUD in the Desktop app.
+
 ## Install
 
 ```bash

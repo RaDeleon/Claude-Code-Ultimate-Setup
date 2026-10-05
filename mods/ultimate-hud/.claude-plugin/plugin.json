@@ -1,9 +1,18 @@
 {
   "name": "ultimate-hud",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Emoji HUD above the prompt: model, repo, branch, context, tokens in/out, cache hit/write %, cost and rate limits",
   "author": { "name": "RaDeleon", "url": "https://github.com/RaDeleon" },
   "repository": "https://github.com/RaDeleon/Claude-Code-Ultimate-Setup",
   "license": "Apache-2.0",
-  "types": "./types/index.d.ts"
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "showIn": {
+      "type": "string",
+      "title": "Show HUD in",
+      "description": "Where the HUD draws: everywhere, only the Code tab of the Claude Desktop app (desktop), or only the terminal",
+      "options": ["everywhere", "desktop", "terminal"],
+      "default": "everywhere"
+    }
+  }
 }

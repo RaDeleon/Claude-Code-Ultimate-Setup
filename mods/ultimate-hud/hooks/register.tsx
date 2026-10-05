@@ -67,8 +67,10 @@ async function readBranch($: EngineInterface, cwd: string): Promise<string | und
   return undefined
 }
 
-export const register: Register = on => {
+export const register: Register = (on, options) => {
   let cwd = ''
+  // The showIn setting: 'everywhere', or the one surface ('desktop' or 'terminal') the band draws on.
+  const showIn = typeof options.showIn === 'string' ? options.showIn : 'everywhere'
 
   on('session.start', async ($, e, next) => {
     cwd = e.cwd
@@ -127,11 +129,15 @@ export const register: Register = on => {
 
   on('command.run', { command: 'hud' }, async $ => {
     const isHidden = await update($, isHiddenAtom, hidden => !hidden)
-    return { text: isHidden ? 'HUD hidden. Run /hud to show it again.' : 'HUD shown.' }
+    if (isHidden) return { text: 'HUD hidden. Run /hud to show it again.' }
+    if (showIn === 'everywhere') return { text: 'HUD shown.' }
+    const where = showIn === 'desktop' ? "the Desktop app's Code tab" : 'the terminal'
+    return { text: `HUD shown. The "Show HUD in" setting limits it to ${where}.` }
   })
 
   on('ui.render', { component: 'AbovePrompt' }, async ($, e, next) => {
-    if (e.props.hasSurvey || (await read($, isHiddenAtom))) {
+    const isOffSurface = showIn !== 'everywhere' && e.surface !== showIn
+    if (e.props.hasSurvey || isOffSurface || (await read($, isHiddenAtom))) {
       return next(e)
     }
 
