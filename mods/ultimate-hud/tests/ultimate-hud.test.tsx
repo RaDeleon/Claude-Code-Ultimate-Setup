@@ -175,3 +175,25 @@ test('/hud hides and shows the band', async ($, on) => {
   expect((await ui.find({ key: 'hud-where' }))?.text).toContain('📁 project')
   await ui.unmount()
 })
+
+for (const showIn of SURFACES) {
+  test(`"Show HUD in: ${showIn}" draws the band there and nowhere else`, { options: { showIn } }, async ($, on) => {
+    setup(on)
+    await $.session.start({ cwd: '/Users/angelo/project', surface: showIn, isInteractive: true })
+
+    for (const surface of SURFACES) {
+      const ui = await $.ui.mount({ ...band(), surface })
+      const where = await ui.find({ key: 'hud-where' })
+      if (surface === showIn) {
+        expect(where?.text).toContain('📁 project')
+      } else {
+        expect(where).toBeUndefined()
+      }
+      await ui.unmount()
+    }
+
+    await $.command.run(run('hud'))
+    const shown = await $.command.run(run('hud'))
+    expect(shown.text).toContain('setting limits it to')
+  })
+}
